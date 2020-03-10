@@ -1,0 +1,119 @@
+@import url(https://fonts.googleapis.com/css?family=Lato&display=swap);
+
+/*utilitarios*/
+body {
+  font-family: 'Lato' !important;
+  font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Lato';
+}
+
+/* reactstrap - update*/
+.btn {
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.error-message-text {
+  color: #dc3545;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.c-footer {
+  transition: all 0.3s ease;
+  background: #fa892b;
+  padding: 0px;
+  color: #fff;
+  bottom: 0;
+  width: 100%;
+  font-size: 13px;
+}
+
+.c-footer__section-info-contact {
+  padding: 10px;
+}
+
+.c-footer__section-copyright {
+  background-color: #2b3a3f;
+  padding: 3px;
+}
+
+.c-footer__contact-info-link {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.c-footer__contact-info-link:hover {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.c-footer__contact-info-link:before {
+  display: block;
+  content: attr(title);
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.c-footer__social-network-icon {
+  font-size: 20px;
+  color: #fff;
+}
+
+.c-luxfacta-layout{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.c-main-home{
+  flex: 1 1;
+}
+
+/*css for toast*/
+.Toastify__toast--success {
+  font-family: 'Lato' !important;
+  letter-spacing: 0.3px;
+  color: #155724;
+  background-color: #d4edda !important;
+  border-color: #c3e6cb;
+  border: 1px solid #c3e6cb;
+  border-radius: 0.25rem !important;
+  box-shadow: none;
+}
+
+.Toastify__toast--error {
+  font-family: 'Lato' !important;
+  letter-spacing: 0.3px;
+  color: #721c24;
+  background-color: #f8d7da !important;
+  border-color: #f5c6cb;
+  border: 1px solid #f5c6cb;
+  border-radius: 0.25rem !important;
+  box-shadow: none;
+}
+
+
+.c-header{
+  background: orange; 
+  padding: 20px;
+  text-align: center;
+}
+
+.c-poll-list__description{
+  overflow-wrap: break-word;
+  word-break: break-all;
+}

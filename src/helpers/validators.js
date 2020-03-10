@@ -1,0 +1,1 @@
+export const requiredValidator = value => (value ? undefined : 'Campo obrigatório');
