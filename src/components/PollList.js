@@ -48,7 +48,7 @@ const PollTable = (props) => {
           <th>Id</th>
           <th>Descrição</th>
           <th>Opções</th>
-          <th>Remover</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>

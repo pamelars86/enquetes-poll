@@ -100,7 +100,7 @@ class VotePollForm extends React.Component {
         </Row>
         <Row className="mb-5">
             <Col sm="12" className="text-center">
-                <Button><FontAwesomeIcon icon="save" />{' Votar'}</Button>
+                <Button><FontAwesomeIcon icon="vote-yea" />{' Votar'}</Button>
             </Col>
         </Row>
       </Form>

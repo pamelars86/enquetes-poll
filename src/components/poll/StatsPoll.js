@@ -1,7 +1,8 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
 import { Bar } from 'react-chartjs-2';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 /*
 {
 2. "poll_id": 1,
@@ -17,10 +18,10 @@ import { Bar } from 'react-chartjs-2';
 
 const StatsPoll = (props) => {
   const { statsPoll, activePoll } = props;
-  const statsId = statsPoll.votes.map(t => t.option_id);
+  const statsNames = activePoll.options.map(t => t.option_description);
   const quantity = statsPoll.votes.map(t => t.qty);
   const dataBarChart = {
-    labels: statsId,
+    labels: statsNames,
     datasets: [
       {
         label: 'Opções',
@@ -39,17 +40,23 @@ const StatsPoll = (props) => {
       
       <Row>
 
-        <Col sm="12"><h4>Informações da enquete</h4></Col>
+        <Col sm="12"><h4><strong>Informações da enquete</strong></h4></Col>
         <Col sm="12">
-            <h5>{activePoll.poll_description}</h5>
-            {activePoll.options.map((o, i)=> (
-              <p key={o.option_id}>{o.option_id} - {o.option_description}</p>
-            ))}
+          <small>Vistas: {statsPoll.views}</small>
+        </Col>
+        <Col sm="12">
+            <h5>Descrição:</h5>
+            <h6>{activePoll.poll_description}</h6>
+            <ul>
+              {activePoll.options.map((o, i)=> (
+                <li key={o.option_id}>{o.option_description} {`(${statsPoll.votes.filter(vote => vote.option_id === o.option_id )[0].qty})`} </li>
+              ))}
+            </ul>
         </Col>
       </Row>
 
       <Row>
-        <Col><h4>Quantidade de votos por opção</h4></Col>
+        <Col><h4><strong>Quantidade de votos por opção</strong></h4></Col>
       </Row>
         <Row>
           <Col sm="6" className="offset-md-3">
@@ -62,13 +69,21 @@ const StatsPoll = (props) => {
               fontSize: 20,
             },
             legend: {
-              display: true,
+              display: false,
               position: 'right',
             },
             scales: {
               xAxes: [{
                 ticks: {
-                  display: true,
+                  display: false,
+                  beginAtZero: true,
+                  min: 0
+                },
+              }],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  min: 0
                 },
               }],
             },
@@ -76,6 +91,16 @@ const StatsPoll = (props) => {
         />
         </Col>
       </Row>
+      <Row className="text-center mt-3">
+        <Col sm="12">
+          <div className="mb-3">
+            <Link className="btn btn-secondary" role="button" to={`/view-poll/${activePoll.poll_id}`}>
+              <FontAwesomeIcon icon="vote-yea" />
+              {' Votar'}
+            </Link>
+          </div>
+        </Col>
+      </Row> 
       
     </div>
   );

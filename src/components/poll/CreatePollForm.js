@@ -132,7 +132,7 @@ class CreatePollForm extends React.Component {
                 />
           </Col>
         </Row>
-        <Row className="mb-5">
+        <Row className="mb-5 mt-5">
             <Col sm="12" className="text-center">
                 <Button><FontAwesomeIcon icon="save" />{' Salvar'}</Button>
             </Col>

@@ -165,6 +165,7 @@ import {
         (newPoll) => {
           dispatch(createPollSuccess(newPoll));
           dispatch(reset('create_poll'));
+          history.push(`/view-poll/${newPoll.poll_id}`);
         },
         (error) => {
           dispatch(createPollFailure(error));
