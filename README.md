@@ -1,4 +1,6 @@
 Indicações
+
+O projeto foi criado com create-react-app
 Para rodar o programa:
 ### `npm run start`
 
