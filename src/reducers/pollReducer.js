@@ -11,6 +11,16 @@ import {
     DELETE_POLL_SUCCESS,
     DELETE_POLL_FAILURE,
 
+    FETCH_POLL,
+    FETCH_POLL_SUCCESS,
+    FETCH_POLL_FAILURE,
+    FETCH_POLL_STATS,
+    FETCH_POLL_STATS_SUCCESS,
+    FETCH_POLL_STATS_FAILURE,
+    VOTE_POLL,
+    VOTE_POLL_SUCCESS,
+    VOTE_POLL_FAILURE,
+
   } from '../actions/pollAction';
   import { toast } from 'react-toastify';
   
@@ -30,6 +40,51 @@ import {
   
   export const poll = (state = initialState, action) => {
     switch (action.type) {
+      case FETCH_POLL:
+        return Object.assign({}, state, {
+          isRemoved: null,
+          isUpdated: null,
+          isCreated: false,
+          isFetchingPoll: true,
+        });
+      case FETCH_POLL_SUCCESS:
+        return Object.assign({}, state, {
+          isRemoved: null,
+          isUpdated: null,
+          isCreated: true,
+          isFetchingPoll: false,
+          activePoll: action.activePoll,
+        });
+      case FETCH_POLL_FAILURE:
+        toast.error('Ocorreu um erro com sua solicitação', optionsError);
+        return Object.assign({}, state, {
+          isCreated: false,
+          error: action.error,
+          isFetchingPoll: false,
+        });
+      
+        case FETCH_POLL_STATS:
+        return Object.assign({}, state, {
+          isRemoved: null,
+          isUpdated: null,
+          isCreated: false,
+          isFetchingStatsPoll: true,
+        });
+      case FETCH_POLL_STATS_SUCCESS:
+        return Object.assign({}, state, {
+          isRemoved: null,
+          isUpdated: null,
+          isCreated: true,
+          isFetchingStatsPoll: false,
+          statsPoll: action.statsPoll,
+        });
+      case FETCH_POLL_STATS_FAILURE:
+        toast.error('Ocorreu um erro com sua solicitação', optionsError);
+        return Object.assign({}, state, {
+          isCreated: false,
+          error: action.error,
+          isFetchingStatsPoll: false,
+        });
       case CREATE_POLL:
         return Object.assign({}, state, {
           isRemoved: null,
@@ -85,11 +140,32 @@ import {
         });
       case LIST_POLLS_FAILURE:
         return Object.assign({}, state, {
-          polls: false,
           error: action.error,
+          isFetchingPolls: false,
           isCreated: false,
           isDeleted: false,
         });
+        case VOTE_POLL:
+          return Object.assign({}, state, {
+            isFetchingPolls: true,
+            error: null,
+            isCreated: false,
+            isDeleted: false,
+          });
+        case VOTE_POLL_SUCCESS:
+          toast.success('Voto enviado com sucesso', optionsSuccess);
+          return Object.assign({}, state, {
+            isFetchingPolls: false,
+            isCreated: false,
+            isDeleted: false,
+          });
+        case VOTE_POLL_FAILURE:
+          toast.error('Ocorreu um erro com sua solicitação', optionsError);
+          return Object.assign({}, state, {
+            error: action.error,
+            isCreated: false,
+            isDeleted: false,
+          });
       default:
         return state;
     }

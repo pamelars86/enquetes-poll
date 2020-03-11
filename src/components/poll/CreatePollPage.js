@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
-import { Link } from 'react-router-dom';
 import CreatePollForm from "./CreatePollForm";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HomeOption from "../HomeOption";
+import Home from "../Home";
 
 class CreatePollPage extends Component {
     componentDidMount() {
@@ -16,15 +16,9 @@ class CreatePollPage extends Component {
   render() {
 
     return (
-      <Container style={{ marginTop: "20px" }} className="c-main-home">
-        <div className="mb-3">
-          <Link className="btn btn-secondary" role="button" to="/">
-            <FontAwesomeIcon icon="arrow-circle-left" />
-            {' Voltar'}
-          </Link>
-        </div>
+      <HomeOption>
         <CreatePollForm {...this.props} />
-      </Container>
+      </HomeOption>
     );
   }
 }

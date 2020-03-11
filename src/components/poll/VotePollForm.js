@@ -39,29 +39,12 @@ const renderField = ({
   const renderAlternatives2 = ({ fields, meta: { error } }) => (
     <Row>
       <Col md="12">
-        <Row>
-          <Col sm="1" xs="1" className="align-self-center hidden-xs">É correta</Col>
-          <Col sm="6" xs="8" className="align-self-center hidden-xs">Alternativa</Col>
-          <Col sm="2" xs="1" className="align-self-center hidden-xs">Remover</Col>
-          { fields.length < 5
-            ? (
-              <Col md="3" sm="6">
-                <Button onClick={() => fields.push({})}>
-                  <FontAwesomeIcon
-                    icon="plus"
-                    className="btn__icon"
-                  />
-                      Adicionar alternativa
-                </Button>
-              </Col>
-            ) : ''}
-        </Row>
   
         {fields.map((alternative, i) => (
           <Row key={alternative}>
             <Col sm="1" xs="1">
               <Field
-                name="selectedIndex"
+                name="option_id"
                 type="radio"
                 component="input"
                 normalize={value => parseInt(value, 10)}
@@ -69,24 +52,7 @@ const renderField = ({
               />
             </Col>
             <Col sm="6" xs="9">
-              <Field
-                type="text"
-                component={renderField}
-                name={`${alternative}.alternativeText`}
-                label="Insira sua alternativa"
-              />
-            </Col>
-            <Col sm="2" xs="1">
-              <Button
-                type="button"
-                title="Remover alternativa"
-                color="danger"
-                onClick={() => fields.remove(i)}
-              >
-                <FontAwesomeIcon
-                  icon="trash-alt"
-                />
-              </Button>
+              <p>{`${alternative}.option_description`}</p>
             </Col>
   
           </Row>
@@ -96,55 +62,45 @@ const renderField = ({
     </Row>
   );
   
-  const RenderAlternatives2 = connect(
-    state => ({
-      selectedIndex: formValueSelector('create_poll')(state, 'selectedIndex'),
-    }),
-  )(renderAlternatives2);
 
 class VotePollForm extends React.Component {
 
   render() {
     const {
-        handleSubmit
+        handleSubmit, activePoll,
       } = this.props;
 
     return (
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
             <Col sm="12">
-              <h3>Criar enquete</h3>
+              <h3>{`Enquete N° ${activePoll.poll_id}`}</h3>
             </Col>
         </Row>
         <Row className="mb-3">
             <Col sm="12">
-              <FormGroup>
-                <Label for="poll_description">Descrição</Label>
-                <Field 
-                  type="textarea" 
-                  name="poll_description"
-                  id="poll_description" 
-                  component={renderField}
-                  label="Insira uma descrição para a enquete"
-                  validate={requiredValidator}
-                />
-              </FormGroup>
+                <h4>Descrição</h4>
+                <p>
+                  {activePoll.poll_description}
+                </p>
             </Col>
         </Row>
         <Row>
           <Col>
-            <Label for="poll_description">Opções</Label>
-            <FieldArray
-                  name="alternatives"
-                  component={RenderAlternatives2}
-                  //validate={minLength3Alternatives}
-                  //resolution={resolution}
-                />
+            <Label for="poll_description">Selecione uma das opções</Label>
+            <div>
+            {activePoll && activePoll.options && activePoll.options.map((option, i) => (
+              <div key={option.option_id}>
+                <Field name="option_id" component="input" type="radio" value={`${option.option_id}`} />
+                {option.option_description}
+              </div>
+            ))}
+            </div>
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-5">
             <Col sm="12" className="text-center">
-                <Button><FontAwesomeIcon icon="save" />{' Salvar'}</Button>
+                <Button><FontAwesomeIcon icon="save" />{' Votar'}</Button>
             </Col>
         </Row>
       </Form>

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Table, Row, Col, Alert, UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle, } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 
 
-const PollOptions = () =>{
+const PollOptions = ({pollId}) =>{
   return (
 
     <UncontrolledDropdown>
@@ -15,22 +15,23 @@ const PollOptions = () =>{
     <DropdownMenu className="label-item__dropdown-menu" right>
       <DropdownItem
         title="Ver enquete"
+        to={`/view-poll/${pollId}`}
         tag={Link}
       >
-        <FontAwesomeIcon icon="eye" />
+        <FontAwesomeIcon icon="vote-yea" />
         {' '}
-        Ver
+        Votar
       </DropdownItem>
       <DropdownItem divider className="label-item__divider" />
       <DropdownItem
-        title="Editar enquete"
+        title="Estatísticas do enquete"
+        to={`/stats-poll/${pollId}`}
         tag={Link}
       >
-        <FontAwesomeIcon icon="pencil-alt" />
+        <FontAwesomeIcon icon="chart-line" />
         {' '}
-        Editar
+        Estatísticas
       </DropdownItem>
-      <DropdownItem divider className="label-item__divider" />
     </DropdownMenu>
   </UncontrolledDropdown>
   )

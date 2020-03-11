@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Field, FieldArray, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
-import { requiredValidator } from '../../helpers/validators';
+import { requiredValidator, maxLength250, minLength2Alternatives } from '../../helpers/validators';
 
 const renderField = ({
     input,
@@ -64,6 +64,7 @@ const renderField = ({
                 component={renderField}
                 name={`${alternative}.alternativeText`}
                 label="Insira sua alternativa"
+                validate={requiredValidator}
               />
             </Col>
             <Col sm="2" xs="1">
@@ -116,7 +117,7 @@ class CreatePollForm extends React.Component {
                   id="poll_description" 
                   component={renderField}
                   label="Insira uma descrição para a enquete"
-                  validate={requiredValidator}
+                  validate={[requiredValidator, maxLength250]}
                 />
               </FormGroup>
             </Col>
@@ -127,12 +128,11 @@ class CreatePollForm extends React.Component {
             <FieldArray
                   name="alternatives"
                   component={RenderAlternatives2}
-                  //validate={minLength3Alternatives}
-                  //resolution={resolution}
+                  validate={minLength2Alternatives}
                 />
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-5">
             <Col sm="12" className="text-center">
                 <Button><FontAwesomeIcon icon="save" />{' Salvar'}</Button>
             </Col>
